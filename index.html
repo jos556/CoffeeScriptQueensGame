@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queens Game</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Queens Game</h1>
+        <div class="game-info">
+            <div class="info-box">
+                <div id="timer">時間: 00:00</div>
+            </div>
+            <div class="info-box">
+                <div id="hint-count">提示次數剩餘: 3</div>
+            </div>
+        </div>
+        <div id="game-board"></div>
+        <div class="controls">
+            <button id="check-button" class="btn">檢查答案</button>
+            <button id="hint-button" class="btn">提示</button>
+            <button id="reset-button" class="btn">重新開始</button>
+        </div>
+    </div>
+
+    <!-- 完成遊戲彈窗 -->
+    <div id="completion-modal" class="modal">
+        <div class="modal-content">
+            <h2>恭喜！</h2>
+            <p>你解開了謎題！</p>
+            <p id="completion-time"></p>
+            <button id="modal-close" class="btn">繼續遊戲</button>
+        </div>
+    </div>
+
+    <!-- 未完成提示彈窗 -->
+    <div id="incomplete-modal" class="modal">
+        <div class="modal-content">
+            <h2>還沒完成</h2>
+            <p>請繼續嘗試！</p>
+            <button id="incomplete-modal-close" class="btn">確定</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="dist/cell.js"></script>
+    <script type="text/javascript" src="dist/board.js"></script>
+    <script type="text/javascript" src="dist/game.js"></script>
+</body>
+</html> 

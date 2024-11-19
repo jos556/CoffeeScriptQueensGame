@@ -1,0 +1,14 @@
+{
+  "name": "queens-game",
+  "version": "1.0.0",
+  "description": "Queens Game puzzle implementation",
+  "main": "index.js",
+  "scripts": {
+    "build": "coffee -c -o dist/ src/",
+    "watch": "coffee -c -w -o dist/ src/"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "coffeescript": "^2.7.0"
+  }
+} 
