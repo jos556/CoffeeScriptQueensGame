@@ -60,7 +60,7 @@
 
 1. 克隆專案：
    bash
-   git clone https://github.com/jos556/.git
+   git clone [https://github.com/jos556/.git](https://github.com/jos556/CoffeeScriptQueensGame.git)
 2. 安裝依賴：
    bash
    npm install
