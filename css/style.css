@@ -314,4 +314,102 @@ button:disabled {
     .cell {
         filter: brightness(0.8);
     }
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.help-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #2196F3;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.help-btn:hover {
+    background: #1976D2;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.help-icon {
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+.help-content {
+    max-width: 500px;
+    padding: 30px;
+}
+
+.rules-container {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.rule-section {
+    margin-bottom: 20px;
+}
+
+.rule-section h3 {
+    color: #2196F3;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.rule-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rule-section li {
+    padding: 8px 0;
+    position: relative;
+    padding-left: 25px;
+    line-height: 1.4;
+}
+
+.rule-section li::before {
+    content: "•";
+    color: #2196F3;
+    position: absolute;
+    left: 8px;
+    font-size: 20px;
+}
+
+/* 深色模式適配 */
+@media (prefers-color-scheme: dark) {
+    .help-btn {
+        background: #1976D2;
+    }
+    
+    .help-btn:hover {
+        background: #1565C0;
+    }
+
+    .rule-section h3 {
+        color: #64B5F6;
+    }
+
+    .rule-section li::before {
+        color: #64B5F6;
+    }
 } 

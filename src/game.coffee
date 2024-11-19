@@ -136,6 +136,18 @@ class Game
     @startTimer()
     @updateHintCount()
 
+    # 添加幫助按鈕事件
+    document.getElementById('help-button').addEventListener 'click', =>
+      document.getElementById('help-modal').style.display = 'block'
+
+    document.getElementById('help-modal-close').addEventListener 'click', =>
+      document.getElementById('help-modal').style.display = 'none'
+
+    # 點擊模態框外部關閉
+    document.getElementById('help-modal').addEventListener 'click', (e) =>
+      if e.target.id == 'help-modal'
+        e.target.style.display = 'none'
+
   startTimer: ->
     @startTime = new Date()
     @timerInterval = setInterval(@updateTimer, 1000)

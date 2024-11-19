@@ -12,7 +12,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Queens Game</h1>
+        <div class="header">
+            <h1>Queens Game</h1>
+            <button id="help-button" class="help-btn" aria-label="遊戲說明">
+                <span class="help-icon">?</span>
+            </button>
+        </div>
         <div class="game-info">
             <div class="info-box">
                 <div id="timer">時間: 00:00</div>
@@ -45,6 +50,33 @@
             <h2>還沒完成</h2>
             <p>請繼續嘗試！</p>
             <button id="incomplete-modal-close" class="btn">確定</button>
+        </div>
+    </div>
+
+    <div id="help-modal" class="modal">
+        <div class="modal-content help-content">
+            <h2>遊戲規則說明</h2>
+            <div class="rules-container">
+                <div class="rule-section">
+                    <h3>基本規則</h3>
+                    <ul>
+                        <li>每行只能放置一個皇后 👑</li>
+                        <li>每列只能放置一個皇后 👑</li>
+                        <li>每個顏色區域只能放置一個皇后 👑</li>
+                        <li>皇后之間不能相鄰（包括對角線）</li>
+                    </ul>
+                </div>
+                <div class="rule-section">
+                    <h3>操作方式</h3>
+                    <ul>
+                        <li>點擊一次：放置 X</li>
+                        <li>點擊兩次：放置皇后 👑</li>
+                        <li>點擊三次：清除格子</li>
+                        <li>提示按鈕：顯示一個正確位置（共3次機會）</li>
+                    </ul>
+                </div>
+            </div>
+            <button id="help-modal-close" class="btn">了解！</button>
         </div>
     </div>
 
