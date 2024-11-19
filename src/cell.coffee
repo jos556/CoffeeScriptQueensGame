@@ -7,12 +7,17 @@ class Cell
     @setupEventListeners()
 
   getRegionColor: ->
-    # 根據region返回不同的顏色
     colors = [
-      '#FFE4E1', '#E6E6FA', '#F0FFF0', '#F5F5DC',
-      '#E0FFFF', '#FFE4B5', '#F0F8FF', '#FFF0F5'
+      '#FFE4E1', # Misty Rose
+      '#E6E6FA', # Lavender
+      '#F0FFF0', # Honeydew
+      '#FFE4B5', # Moccasin
+      '#E0FFFF', # Light Cyan
+      '#FFF0F5', # Lavender Blush
+      '#F0F8FF', # Alice Blue
+      '#FFDAB9'  # Peach Puff
     ]
-    colors[@region % colors.length]
+    return colors[@region % 8]
 
   setupEventListeners: ->
     @element.addEventListener 'click', =>

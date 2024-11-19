@@ -53,12 +53,12 @@ class Game
 
   # 基於皇后解生成區域
   generateRegionsFromSolution: (solution) ->
-    # 創建二維數組的正確方式
+    # 創建二維數組
     regions = []
     for i in [0...@size]
       row = []
       for j in [0...@size]
-        row.push(0)
+        row.push(-1)  # 使用-1表示未分配區域
       regions.push(row)
 
     regionCount = 0
@@ -66,43 +66,74 @@ class Game
     # 為每個皇后創建一個區域
     for row in [0...@size]
       col = solution[row]
-      currentRegion = regionCount++
-      regions[row][col] = currentRegion
-      
-      # 擴展區域
-      @expandRegion(regions, row, col, currentRegion)
+      if regions[row][col] is -1  # 只有在未分配時才創建新區域
+        currentRegion = regionCount
+        regionCount++
+        if regionCount > 7  # 確保不超過8個區域
+          regionCount = 0
+        regions[row][col] = currentRegion
+        @expandRegion(regions, row, col, currentRegion)
     
     # 填充剩餘的空格
     @fillRemainingSpaces(regions)
-    regions
+    
+    # 驗證區域數量
+    usedRegions = new Set(regions.flat())
+    console.log("Generated regions count:", usedRegions.size)
+    
+    return regions
 
   # 擴展區域
   expandRegion: (regions, row, col, region) ->
-    # 隨機擴展區域的大小（2-4個格子）
-    expansionSize = 2 + Math.floor(Math.random() * 3)
+    # 確保每個區域至少有2-3個格子
+    expansionSize = 2 + Math.floor(Math.random() * 2)
     directions = @shuffleArray([[-1,0], [1,0], [0,-1], [0,1]])
     
-    for i in [0...expansionSize]
-      for [dx, dy] in directions
-        newRow = row + dx
-        newCol = col + dy
-        if @isValidPosition(newRow, newCol) and regions[newRow][newCol] == 0
-          regions[newRow][newCol] = region
-          break
+    expanded = 0
+    for [dx, dy] in directions
+      break if expanded >= expansionSize
+      newRow = row + dx
+      newCol = col + dy
+      if @isValidPosition(newRow, newCol) and regions[newRow][newCol] is -1
+        regions[newRow][newCol] = region
+        expanded++
 
   # 填充剩餘空格
   fillRemainingSpaces: (regions) ->
+    maxRegion = 7  # 設定最大區域編號
+
     for row in [0...@size]
       for col in [0...@size]
-        if regions[row][col] == 0
-          # 找到鄰近的區域
+        if regions[row][col] is -1
           neighbors = @getNeighborRegions(regions, row, col)
           if neighbors.length > 0
-            # 隨機選擇一個鄰近區域
-            regions[row][col] = neighbors[Math.floor(Math.random() * neighbors.length)]
+            # 選擇數量最少的鄰近區域
+            regionCounts = {}
+            for region in neighbors
+              regionCounts[region] = 0 unless regionCounts[region]?
+              regionCounts[region]++
+            
+            minCount = Math.min(...Object.values(regionCounts))
+            availableRegions = Object.keys(regionCounts).filter((r) -> 
+              regionCounts[r] is minCount
+            )
+            regions[row][col] = parseInt(availableRegions[0])
           else
-            # 如果沒有鄰近區域，創建新區域
-            regions[row][col] = Math.max(...regions.flat()) + 1
+            # 如果沒有鄰近區域，使用最小可用的區域號（0-7）
+            usedRegions = new Set(regions.flat().filter((r) -> r isnt -1))
+            for i in [0..maxRegion]
+              unless usedRegions.has(i)
+                regions[row][col] = i
+                break
+            # 如果沒有找到可用區域，使用區域 0
+            if regions[row][col] is -1
+              regions[row][col] = 0
+
+    # 最後檢查並修正任何大於 7 的區域
+    for row in [0...@size]
+      for col in [0...@size]
+        if regions[row][col] > maxRegion
+          regions[row][col] = regions[row][col] % (maxRegion + 1)
 
   # 獲取鄰近的區域
   getNeighborRegions: (regions, row, col) ->
@@ -112,7 +143,7 @@ class Game
     for [dx, dy] in directions
       newRow = row + dx
       newCol = col + dy
-      if @isValidPosition(newRow, newCol) and regions[newRow][newCol] != 0
+      if @isValidPosition(newRow, newCol) and regions[newRow][newCol] isnt -1
         neighbors.add(regions[newRow][newCol])
     
     Array.from(neighbors)
