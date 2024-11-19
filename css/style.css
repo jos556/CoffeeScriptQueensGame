@@ -166,4 +166,152 @@ button:disabled {
     0% { opacity: 1; }
     50% { opacity: 0.5; }
     100% { opacity: 1; }
+}
+
+/* 添加響應式設計 */
+/* 平板設備 (768px 及以下) */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .info-box {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .btn {
+        width: 80%;
+        max-width: 300px;
+        margin: 5px 0;
+    }
+
+    /* 調整遊戲板大小 */
+    .cell {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+}
+
+/* 手機設備 (480px 及以下) */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .cell {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+        margin: 30% auto;
+    }
+
+    /* 添加觸控優化 */
+    .cell {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 防止雙擊縮放 */
+    .container {
+        touch-action: manipulation;
+    }
+}
+
+/* 添加觸控反饋效果 */
+@media (hover: none) {
+    .cell:active {
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    .btn:active {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+}
+
+/* 橫向模式優化 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .game-info {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    #game-board {
+        margin: 10px;
+    }
+
+    .controls {
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .modal-content {
+        margin: 5% auto;
+    }
+}
+
+/* 添加深色模式支援 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .container {
+        background-color: #2d2d2d;
+    }
+
+    .info-box {
+        background-color: #3d3d3d;
+        color: #ffffff;
+    }
+
+    .cell {
+        border-color: #4d4d4d;
+    }
+
+    .modal-content {
+        background-color: #2d2d2d;
+        color: #ffffff;
+    }
+
+    /* 調整深色模式下的顏色 */
+    .cell {
+        filter: brightness(0.8);
+    }
 } 
